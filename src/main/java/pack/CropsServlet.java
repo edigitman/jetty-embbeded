@@ -17,16 +17,12 @@ import java.util.*;
  */
 public class CropsServlet extends HttpServlet {
 
-    private int attempts;
     private List<Crop> crops;
-    private int size;
-    private int cycles;
-    private int maxAttempts;
-
+    public final static String dbFile = "e:\\a.txt";
 
     public void init() {
         try {
-            crops = IOUtils.loadAll("c:\\a.txt");
+            crops = IOUtils.loadAll(dbFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,9 +93,9 @@ public class CropsServlet extends HttpServlet {
         }
 
         Collections.sort(crops, new CropComparator());
-        // todo save to file
+        IOUtils.writeToFile(dbFile, crops);
+        crops = IOUtils.loadAll(dbFile);
         response.sendRedirect("/");
-
     }
 
     protected void doDelete(HttpServletRequest request,

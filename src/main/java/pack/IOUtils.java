@@ -3,7 +3,7 @@ package pack;
 import pack.model.Crop;
 import pack.model.CropType;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -40,6 +40,20 @@ public class IOUtils {
                 cultura.addFavorable(ctl);
             }
         }
+    }
+
+    public static void writeToFile(String fileName, List<Crop> crops) throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter(fileName, "UTF-8");
+        for (Crop crop : crops) {
+            if (crop.getType() != null) {
+                writer.print(crop.getName() + " " + crop.getType().name() + " ");
+                for (Crop c : crop.getFavorable()) {
+                    writer.print(c.getName() + " ");
+                }
+                writer.print("\n");
+            }
+        }
+        writer.close();
     }
 
     private static Crop addToList(String cultura, List<Crop> list) {
