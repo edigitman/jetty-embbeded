@@ -1,0 +1,90 @@
+<! DOCTYPE html>
+<html>
+<head>
+    <title>Crops rotation</title>
+</head>
+<body>
+
+adauga sau editeaza planta<br/>
+<a href="/">&lt;- Inapoi </a>
+
+<form action="/crops" method="post">
+    <table>
+        <tr>
+            <td><label for="name" >Nume planta:</label></td>
+            <td><input id="name" name="name" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="type" >Tip planta:</label></td>
+            <td><select id="type" name="type">
+                <option>BIG</option>
+                <option>MEDIUM</option>
+                <option>INGRASAMANT</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="favs" >Favorite:</label></td>
+            <td><select id="favs" name="favs" multiple="multiple">
+            </select></td>
+        </tr>
+    </table>
+
+    <input id="save" type="submit" value="Salveaza">
+</form>
+
+
+<script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="resources/js/jquery-picklist/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="resources/js/jquery-picklist/jquery-picklist.js"></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+
+        $.get("/crops", function( data ) {
+            var output = [];
+            $.each(data, function() {
+                output.push('<option value="'+ this.name +'">'+ this.name +'</option>'); });
+
+            $('#favs').html(output.join(''));
+
+            var search = window.location.search;
+            if(search!=''){
+                $.get("/crops" + search, function( data ) {
+                    $("#name").val(data.name);
+                    $("#type").val(data.type);
+
+                    $.each(data.fav, function(key, value) {
+                        var opt = $("#favs option[value='" + value + "']");
+                        if(opt!=null || opt!=[]){
+                            $(opt).attr("selected","selected");
+                        }
+                    });
+                    $('#favs').pickList( {
+                        sourceListLabel:    "Toate",
+                        targetListLabel:    "Favorite",
+                        addAllLabel:        "Adauga toate",
+                        addLabel:           "Adauga",
+                        removeAllLabel:     "Sterge toate",
+                        removeLabel:        "Sterge",
+                        sortAttribute:      "value"
+                    });
+                });
+            }else{
+                $('#favs').pickList({
+                    sourceListLabel:    "Toate",
+                    targetListLabel:    "Favorite",
+                    addAllLabel:        "Adauga toate",
+                    addLabel:           "Adauga",
+                    removeAllLabel:     "Sterge toate",
+                    removeLabel:        "Sterge",
+                    sortAttribute:      "value"
+                });
+            }
+        });
+    });
+</script>
+
+<link type="text/css" href="resources/js/jquery-picklist/jquery-picklist.css" rel="stylesheet" />
+</body>
+</html>

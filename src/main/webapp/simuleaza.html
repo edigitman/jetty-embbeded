@@ -1,0 +1,60 @@
+<! DOCTYPE html>
+<html>
+<head>
+    <title>Crops rotation</title>
+</head>
+<body>
+
+Simuleaza<br/>
+<a href="/">&lt;- Inapoi </a>
+<br/>
+
+<table>
+    <tr>
+        <td>Numar plante:</td>
+        <td><input id="size" name="size" type="number"></td>
+    </tr>
+    <tr>
+        <td>Numar ani:</td>
+        <td><input id="cycles" name="cycles" type="number"></td>
+    </tr>
+</table>
+<input id="start" type="button" value="Start">
+
+<table id="result"></table>
+
+
+<script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("ready!");
+    });
+
+    $("#start").on("click", function () {
+        var size = $("#size").val();
+        var cycles = $("#cycles").val();
+
+        $.get("/crops?doWork&size=" + size + "&cycles=" + cycles, function (data) {
+            var tbl_body = "<tr><td><b>Distanta</b></td><td><b>Nume</b></td><td><b>Tip</b></td></tr>";
+            for(var i=0; i < data.length; i++) {
+                var dist = 0;
+                $.each(data[i].crops, function(key, value) {
+                    var tbl_row = "";
+                    tbl_row += "<td>" + dist + "</td>";
+                    tbl_row += "<td>" + value.name + "</td>";
+                    tbl_row += "<td>" + value.type + "</td>";
+                    tbl_body += "<tr>"+tbl_row+"</tr>";
+                    dist += 0.25;
+                });
+                tbl_body += "<tr><td colspan='3' style='height: 10px; background-color: red'></td></tr>";
+            }
+            $("#result").html(tbl_body);
+        });
+    });
+
+
+</script>
+
+
+</body>
+</html>

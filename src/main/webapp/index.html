@@ -1,25 +1,45 @@
 <! DOCTYPE html>
 <html>
 <head>
-  <title>An Ember dice roller</title>
-
+    <title>Crops rotation</title>
 </head>
-
 <body>
-<script type="text/x-handlebars" id="application">
-    <h1>Dice Roller</h1>
-    {{outlet}}
+
+rotirea plantelor
+<br/>
+<a href="adauga.html">Adauga planta</a>
+<span style="width: 50px"></span>
+<a href="simuleaza.html">Simuleaza</a>
+
+<br/>
+
+<table id="result"></table>
+
+
+<script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+    });
+
+
+    $.get( "/crops", function( data ) {
+        var tbl_body = "<tr><td><b>Nume</b></td><td><b>Tip</b></td><td><b>Favorite</b></td></tr>";
+        var odd_even = false;
+        $.each(data, function() {
+            var tbl_row = "";
+            tbl_row += "<td><a href='adauga.html?crop="+this.name+"'>" + this.name +  "</a></td>";
+            tbl_row += "<td>"+this.type+"</td>";
+            tbl_row += "<td>"+this.fav+"</td>";
+
+            tbl_body += "<tr class=\""+( odd_even ? "odd" : "even")+"\">"+tbl_row+"</tr>";
+            odd_even = !odd_even;
+        });
+        $("#result").html(tbl_body);
+    });
+
 </script>
 
-<script type="text/x-handlebars" id="index">
-    <p>
-        Our content goes here
-    </p>
-</script>
 
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.0.0/ember.prod.js"></script>
-<script type="text/javascript" src="resources/js/app.js"></script>
 </body>
 </html>
