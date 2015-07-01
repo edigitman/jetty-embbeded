@@ -25,7 +25,7 @@ public class HelloWorld {
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
         resource_handler.setWelcomeFiles(new String[]{"index.html"});
-        resource_handler.setResourceBase(".");
+        resource_handler.setResourceBase("./hello-world-0.1-SNAPSHOT");
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[] { resource_handler, handler });
