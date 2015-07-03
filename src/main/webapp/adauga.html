@@ -2,40 +2,64 @@
 <html>
 <head>
     <title>Crops rotation</title>
+    <!-- Bootstrap -->
+    <link href="resources/css/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="resources/js/jquery-picklist/jquery-picklist.css" rel="stylesheet" />
 </head>
 <body>
 
-adauga sau editeaza planta<br/>
-<a href="/">&lt;- Inapoi </a>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Rotirea plantelor</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="adauga.html">Adauga</a></li>
+                <li><a href="simuleaza.html">Simuleaza</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
-<form action="/crops" method="post">
-    <table>
-        <tr>
-            <td><label for="name" >Nume planta:</label></td>
-            <td><input id="name" name="name" type="text"></td>
-        </tr>
-        <tr>
-            <td><label for="type" >Tip planta:</label></td>
-            <td><select id="type" name="type">
-                <option>BIG</option>
-                <option>MEDIUM</option>
-                <option>INGRASAMANT</option>
-            </select></td>
-        </tr>
-        <tr>
-            <td><label for="favs" >Favorite:</label></td>
-            <td><select id="favs" name="favs" multiple="multiple">
-            </select></td>
-        </tr>
-    </table>
+<div class="container">
+    <div class="jumbotron">
+        <h3>Adauga sau editeaza planta</h3>
+    </div>
+    <div>
+        <form action="/crops" method="post">
+            <div class="form-group">
+                <label for="name">nume</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nume">
+            </div>
+            <div class="form-group">
+                <label for="type">Tip planta</label>
+                <select id="type" name="type">
+                    <option>BIG</option>
+                    <option>MEDIUM</option>
+                    <option>INGRASAMANT</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="favs" >Favorite:</label>
+                <select id="favs" name="favs" multiple="multiple"></select>
+            </div>
 
-    <input id="save" type="submit" value="Salveaza">
-</form>
-
+            <input class="btn btn-default" id="save" type="submit" value="Salveaza">
+        </form>
+    </div>
+</div>
 
 <script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
 <script type="text/javascript" src="resources/js/jquery-picklist/jquery.ui.widget.js"></script>
 <script type="text/javascript" src="resources/js/jquery-picklist/jquery-picklist.js"></script>
+<script type="text/javascript" src="resources/css/bootstrap/js/bootstrap.js"></script>
 
 <script type="text/javascript">
     $( document ).ready(function() {
@@ -85,6 +109,6 @@ adauga sau editeaza planta<br/>
     });
 </script>
 
-<link type="text/css" href="resources/js/jquery-picklist/jquery-picklist.css" rel="stylesheet" />
+
 </body>
 </html>

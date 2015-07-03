@@ -2,21 +2,39 @@
 <html>
 <head>
     <title>Crops rotation</title>
+    <!-- Bootstrap -->
+    <link href="resources/css/bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Rotirea plantelor</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="adauga.html">Adauga</a></li>
+                <li><a href="simuleaza.html">Simuleaza</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
-rotirea plantelor
-<br/>
-<a href="adauga.html">Adauga planta</a>
-<span style="width: 50px"></span>
-<a href="simuleaza.html">Simuleaza</a>
-
-<br/>
-
-<table id="result"></table>
-
+<div class="container">
+    <div class="jumbotron">
+        <h3>Tabel plante</h3>
+    </div>
+    <table id="result" class="table table-bordered"></table>
+</div>
 
 <script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="resources/css/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
     $( document ).ready(function() {
         console.log( "ready!" );

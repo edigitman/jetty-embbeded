@@ -3,6 +3,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -16,6 +17,10 @@ import pack.CropsServlet;
 public class HelloWorld {
 
     public static void main(String[] args) throws Exception {
+		
+		Properties props = System.getProperties();
+		props.setProperty("crops.db.file", args[0]);
+		
         Server server = new Server(8080);
         ServletHandler handler = new ServletHandler();
         server.setHandler(handler);
@@ -25,8 +30,8 @@ public class HelloWorld {
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
         resource_handler.setWelcomeFiles(new String[]{"index.html"});
-        resource_handler.setResourceBase("./hello-world-0.1-SNAPSHOT");
-
+        resource_handler.setResourceBase(".");
+///
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[] { resource_handler, handler });
         server.setHandler(handlers);

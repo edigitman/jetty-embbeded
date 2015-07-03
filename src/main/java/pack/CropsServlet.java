@@ -18,9 +18,12 @@ import java.util.*;
 public class CropsServlet extends HttpServlet {
 
     private List<Crop> crops;
-    public final static String dbFile = "e:\\a.txt";
+    public static String dbFile;
 
     public void init() {
+		Properties props = System.getProperties();
+		dbFile = props.getProperty("crops.db.file");
+		
         try {
             crops = IOUtils.loadAll(dbFile);
         } catch (IOException e) {
@@ -51,7 +54,7 @@ public class CropsServlet extends HttpServlet {
                 int sizeInt = Integer.parseInt(size[1]);
                 int cyclesInt = Integer.parseInt(cycles[1]);
 
-                Algorithm a = new Algorithm(sizeInt, crops);
+                Algorithm a = new Algorithm(sizeInt - 1, crops);
                 List<CropCycle> history = new ArrayList<>();
 
                 //primul ciclu de cultivare

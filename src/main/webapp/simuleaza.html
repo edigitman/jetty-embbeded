@@ -2,29 +2,55 @@
 <html>
 <head>
     <title>Crops rotation</title>
+    <!-- Bootstrap -->
+    <link href="resources/css/bootstrap/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 
-Simuleaza<br/>
-<a href="/">&lt;- Inapoi </a>
-<br/>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Rotirea plantelor</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="adauga.html">Adauga</a></li>
+                <li><a href="simuleaza.html">Simuleaza</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
-<table>
-    <tr>
-        <td>Numar plante:</td>
-        <td><input id="size" name="size" type="number"></td>
-    </tr>
-    <tr>
-        <td>Numar ani:</td>
-        <td><input id="cycles" name="cycles" type="number"></td>
-    </tr>
-</table>
-<input id="start" type="button" value="Start">
+<div class="container">
+    <div class="jumbotron">
+        <h3>Simuleaza</h3>
+    </div>
+    <div>
+        <div class="form-group">
+            <label for="size">Numar plante:</label>
+            <input id="size" name="size" type="number">
+        </div>
+        <div class="form-group">
+            <label for="cycles">Numar ani:</label>
+            <input id="cycles" name="cycles" type="number">
+        </div>
 
-<table id="result"></table>
+        <input class="btn btn-default" id="start" type="button" value="Start">
+
+        <table id="result" class="table table-bordered"></table>
+    </div>
+</div>
+
 
 
 <script type="text/javascript" src="resources/js/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="resources/css/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         console.log("ready!");

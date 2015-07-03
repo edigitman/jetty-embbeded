@@ -24,7 +24,7 @@ public class Algorithm {
     private int size = 0;
     private List<CropCycle> history;
     private Stack<CropInOrder> current;
-    private Crop currentCrop;
+    private CropType lastType;
 
     public CropCycle solve(List<CropCycle> history) {
         this.history = history;
@@ -53,7 +53,7 @@ public class Algorithm {
                             choose = null;
                         }
                     }
-
+                    lastType = CropType.BIG;
                     CropInOrder cin = new CropInOrder();
                     cin.setCrop(choose);
                     cin.setPosition(0);
@@ -63,6 +63,8 @@ public class Algorithm {
                     Crop prevCrop = cc.getCropsInOrder().get(0).getCrop();
                     for (Crop crop : crops) {
                         if (checkSuccessionTypeUniqeness(prevCrop, crop)) {
+                            if (!CropType.INGRASAMANT.equals(crop.getType()))
+                                lastType = crop.getType();
                             CropInOrder cin = new CropInOrder();
                             cin.setCrop(crop);
                             cin.setPosition(0);
@@ -81,6 +83,8 @@ public class Algorithm {
                         continue;
                     }
 
+                    if (!CropType.INGRASAMANT.equals(currentCrop.getType()))
+                        lastType = currentCrop.getType();
                     CropInOrder cin = new CropInOrder();
                     cin.setCrop(currentCrop);
                     cin.setPosition(newPosition);
@@ -120,6 +124,14 @@ public class Algorithm {
         }
         for (CropInOrder cio : this.current) {
             if (cio.getCrop().equals(current)) {
+                return false;
+            }
+        }
+        if (CropType.INGRASAMANT.equals(previous.getType())) {
+            if (CropType.BIG.equals(lastType) && !CropType.MEDIUM.equals(current.getType())) {
+                return false;
+            }
+            if (CropType.MEDIUM.equals(lastType) && !CropType.BIG.equals(current.getType())) {
                 return false;
             }
         }
